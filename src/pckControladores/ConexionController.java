@@ -6,8 +6,11 @@ package pckControladores;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 import pckModelos.Conexion;
+import pckModelos.PersonaModel;
 import pckVistas.frmLogin;
+import pckVistas.frmPersonas;
 import pckVistas.frmPrincipal;
 
 /**
@@ -17,12 +20,17 @@ import pckVistas.frmPrincipal;
 public class ConexionController implements ActionListener{
     frmPrincipal VistaPrincipal;
     frmLogin VistaLogin;
+    frmPersonas VistaPersonas;
     Conexion ModeloConexion;
+    PersonaModel ModeloPersona;
 
-    public ConexionController(frmPrincipal VistaPrincipal, frmLogin VistaLogin, Conexion ModeloConexion) {
+    public ConexionController(frmPrincipal VistaPrincipal, frmLogin VistaLogin,
+            Conexion ModeloConexion, frmPersonas VistaPersonas, PersonaModel ModeloPersona) {
         this.VistaPrincipal = VistaPrincipal;
         this.VistaLogin = VistaLogin;
         this.ModeloConexion = ModeloConexion;
+        this.VistaPersonas = VistaPersonas;
+        this.ModeloPersona = ModeloPersona;
 
         //LEVANTAR FORM PRINCIPAL
         this.VistaPrincipal.setExtendedState(frmPrincipal.MAXIMIZED_BOTH);
@@ -40,6 +48,17 @@ public class ConexionController implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==this.VistaLogin.btnConectar){
             this.ModeloConexion.Conectar(this.VistaLogin.txtUser.getText(), this.VistaLogin.txtPassword.getText());
+            
+            if(ModeloConexion!=null){
+                this.VistaLogin.dispose();
+                this.VistaPersonas.btnGuardar.addActionListener(this);
+                this.VistaPersonas.setLocationRelativeTo(null);
+                this.VistaPersonas.setVisible(true);
+            }
+        }
+        if(e.getSource()== this.VistaPersonas.btnGuardar){
+            this.ModeloPersona.GuardarPersona(this.VistaPersonas.txtApellidos.getText(),this.VistaPersonas.txtNombre.getText(),
+                    this.VistaPersonas.txtTelefono.getText());
         }
     }
 }

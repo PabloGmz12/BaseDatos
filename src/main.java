@@ -1,7 +1,9 @@
 
 import pckControladores.ConexionController;
 import pckModelos.Conexion;
+import pckModelos.PersonaModel;
 import pckVistas.frmLogin;
+import pckVistas.frmPersonas;
 import pckVistas.frmPrincipal;
 
 /*
@@ -21,8 +23,10 @@ public class main {
     public static void main(String[] args) {
         frmPrincipal VistaPrincipal = new frmPrincipal();
         frmLogin VistaLogin = new frmLogin(VistaPrincipal,true);
+        frmPersonas VistaPersonas = new frmPersonas(VistaPrincipal,true);
         Conexion ModeloConexion = new Conexion();
-        ConexionController ControladorConexion = new ConexionController(VistaPrincipal, VistaLogin, ModeloConexion);
+        PersonaModel ModeloPersona = new PersonaModel();
+        ConexionController ControladorConexion = new ConexionController(VistaPrincipal, VistaLogin, ModeloConexion, VistaPersonas,ModeloPersona);
 
     }
 }

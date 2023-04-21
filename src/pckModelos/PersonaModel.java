@@ -5,6 +5,7 @@
 package pckModelos;
 
 import java.sql.*;
+import javax.swing.JOptionPane;
 /**
  *
  * @author huawei
@@ -19,6 +20,10 @@ public class PersonaModel {
         this.apellidos = apellidos;
         this.nombre = nombre;
         this.telefono = telefono;
+    }
+    
+    public PersonaModel(){
+        
     }
 
     public String getApellidos() {
@@ -45,12 +50,14 @@ public class PersonaModel {
         this.telefono = telefono;
     }
     
-    public void GuardarPersona(){
+    public void GuardarPersona() throws SQLException{
         try{
             Conexion nuevaConexion = new Conexion();
             this.con = nuevaConexion.Conectar(nombre, nombre);
             Statement sentencia = con.createStatement();
-            sentencia.execute("insert into Persona values ('apellidos', 'nombre', 'telefono')");
+            sentencia.execute("insert into PERSONAJES values ('"+this.getApellidos()+"','"+this.getNombre()+"','"+this.getTelefono()+"')");
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Hay un error al insertar registro..."+e.getMessage());
         }
     }
 }

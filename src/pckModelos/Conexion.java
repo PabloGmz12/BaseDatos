@@ -16,9 +16,9 @@ public class Conexion {
     public Connection Conectar(String user, String pass){
         try{
         DriverManager.deregisterDriver(new oracle.jdbc.driver.OracleDriver());
-        String nombreServidor = "127.0.0.1";
+        String nombreServidor = "168.234.74.80";
         String numPuerto = "1521";
-        String sid = "xe";
+        String sid = "umg";
         String url = "jdbc:oracle:thin:@"+ nombreServidor+":" + numPuerto+":"+sid;
         conexion =DriverManager.getConnection(url,user,pass);
         JOptionPane.showMessageDialog(null, "Conexión exitosa!");
